@@ -103,7 +103,7 @@
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
-	      <name>Snapshot Nexus Repository </name>
+	      <name>Snapshot Nexus Repository</name>
 	      <url>http://3.108.219.158:8081/repository/wallmart-snapshot/</url>
 	    </snapshotRepository>
 	    
