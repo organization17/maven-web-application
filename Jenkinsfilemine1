@@ -1,0 +1,40 @@
+node {
+
+def mavenHomedir = tool name: "maven3.8.3"
+
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: '']])
+
+
+stage('checkOutCode'){
+git branch: 'development', credentialsId: 'a90e856a-234a-4d56-b7c4-493fb44a8aeb', url: 'https://github.com/organization17/maven-web-application.git'
+}
+
+stage('Build'){
+sh "${mavenHomedir}/bin/mvn clean package"
+}
+
+/*
+stage('ExecuteSonarQubeReport'){
+sh "${mavenHomedir}/bin/mvn sonar:sonar"
+}
+
+stage('UploadArticfactIntoNexusRepo'){
+sh "${mavenHomedir}/bin/mvn deploy"
+}
+
+stage('DeployAppintoTomcatServer'){
+sshagent(['ab859d55-5668-4d19-8679-c3e54a67bf93']) {
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.233.252.96:/opt/apache-tomcat-9.0.54/webapps"
+}
+}
+
+stage('SendMailNotification'){
+mail bcc: '', body: '''Build Over..
+
+Thanks,
+Raja''', cc: 'rajadevops0217@gmail.com', from: '', replyTo: '', subject: 'Build over...', to: 'rajadevops0217@gmail.com'
+}
+
+*/
+
+}
